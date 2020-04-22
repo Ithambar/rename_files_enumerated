@@ -1,5 +1,7 @@
 package group.spontaneous.project_one;
 
+import java.util.ArrayList;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,10 +17,21 @@ public class ProjectOneApplication {
 		int[] ages = { 3, 5 };
 		String[] colors = { "black", "brown" };
 
-		var tollerName = new Dog(names[0], ages[0], colors[0]);
-		var auchEinTollerName = new Dog(names[1], ages[1], colors[1]);
+		var dogs = new ArrayList<Dog>();
 
-		tollerName.whoAmI();
-		auchEinTollerName.whoAmI();
+		for (var i = 0; i < names.length; i++) {
+			var newDog = new Dog(names[i], ages[i], colors[i]);
+			dogs.add(newDog);
+		}
+
+		for (var dogInList : dogs) {
+			while (dogInList.getAge() < 10) {
+				dogInList.setAge(dogInList.getAge() + 1);
+				dogInList.whoAmI();
+			}
+			if (dogInList.getName().equals("Bob")) {
+				System.out.println("Woof!");
+			}
+		}
 	}
 }
