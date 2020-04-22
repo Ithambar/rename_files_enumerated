@@ -24,6 +24,8 @@ public class ProjectOneApplication {
 			dogs.add(newDog);
 		}
 
+		// Geheime Message
+
 		for (var dogInList : dogs) {
 			while (dogInList.getAge() < 10) {
 				dogInList.setAge(dogInList.getAge() + 1);
