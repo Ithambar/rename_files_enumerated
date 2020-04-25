@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 
@@ -20,16 +21,22 @@ public class Application {
 	@Value("${files.prefix}")
 	private String prefix;
 
+	private static final String GENERIC_ERROR = "An error occurred";
+
 	@PostConstruct
 	public void init() {
 		File[] input = new File("./input").listFiles();
 		File[] output = new File("./output").listFiles();
 
+		try (Scanner terminalInput = new Scanner(System.in)) {
+			prefix = terminalInput.nextLine();
+		}
+
 		for (var file : output) {
 			try {
 				Files.delete(Paths.get(file.getPath()));
 			} catch (IOException e) {
-				LoggerFactory.getLogger(getClass()).error("An error occurred", e);
+				LoggerFactory.getLogger(getClass()).error(GENERIC_ERROR, e);
 			}
 		}
 
@@ -54,7 +61,12 @@ public class Application {
 			try {
 				Files.write(Paths.get("./output/#errors.txt"), errorFileContent.getBytes());
 			} catch (IOException e) {
-				LoggerFactory.getLogger(getClass()).error("An error occurred", e);
+				LoggerFactory.getLogger(getClass()).error(GENERIC_ERROR, e);
+			}
+		}
+		try (Scanner terminalInput = new Scanner(System.in)) {
+			if (terminalInput.hasNext()) {
+				terminalInput.nextLine();
 			}
 		}
 	}
