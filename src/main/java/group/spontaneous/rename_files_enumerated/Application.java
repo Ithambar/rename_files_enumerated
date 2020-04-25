@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -19,13 +20,20 @@ public class Application {
 
 	private static final String GENERIC_ERROR = "An error occurred";
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	@PostConstruct
 	public void init() {
-		File[] input = new File("./input").listFiles();
-		File[] output = new File("./output").listFiles();
 
-		var prefix = "file";
+		var prefix = getPrefix();
 
+		cleanOutput();
+		renameFiles(prefix);
+
+	}
+
+	private String getPrefix() {
+		var result = "file";
 		System.out.println("Please enter Prefix...\nDefault: 'file'");
 
 		try (Scanner terminalInput = new Scanner(System.in)) {
@@ -33,7 +41,7 @@ public class Application {
 
 			while (!inputText.isBlank()) {
 				if (inputText.matches("^[\\w\\d-_\\ \\.\\(\\){}\\[\\]]+$")) {
-					prefix = inputText;
+					result = inputText;
 					break;
 				} else {
 
@@ -44,15 +52,22 @@ public class Application {
 				}
 			}
 		}
+		return result;
+	}
 
+	private void cleanOutput() {
+		File[] output = new File("./output").listFiles();
 		for (var file : output) {
 			try {
 				Files.delete(Paths.get(file.getPath()));
 			} catch (IOException e) {
-				LoggerFactory.getLogger(getClass()).error(GENERIC_ERROR, e);
+				logger.error(GENERIC_ERROR, e);
 			}
 		}
+	}
 
+	private void renameFiles(String prefix) {
+		File[] input = new File("./input").listFiles();
 		var errorFileContent = "";
 
 		for (var i = 0; i < input.length; i++) {
@@ -74,7 +89,7 @@ public class Application {
 			try {
 				Files.write(Paths.get("./output/#errors.txt"), errorFileContent.getBytes());
 			} catch (IOException e) {
-				LoggerFactory.getLogger(getClass()).error(GENERIC_ERROR, e);
+				logger.error(GENERIC_ERROR, e);
 			}
 		}
 	}
