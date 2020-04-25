@@ -10,16 +10,12 @@ import java.util.Scanner;
 import javax.annotation.PostConstruct;
 
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope("singleton")
 public class Application {
-
-	@Value("${files.prefix}")
-	private String prefix;
 
 	private static final String GENERIC_ERROR = "An error occurred";
 
@@ -28,8 +24,13 @@ public class Application {
 		File[] input = new File("./input").listFiles();
 		File[] output = new File("./output").listFiles();
 
+		var prefix = "file";
+
 		try (Scanner terminalInput = new Scanner(System.in)) {
-			prefix = terminalInput.nextLine();
+			var inputText = terminalInput.nextLine();
+			if (inputText.matches("^[\\w\\d-_\\ \\.\\(\\){}\\[\\]]+$")) {
+				prefix = inputText;
+			}
 		}
 
 		for (var file : output) {
