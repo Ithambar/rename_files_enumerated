@@ -44,11 +44,12 @@ public class Application {
 				errorFileContent += currentFile.getName() + "\n";
 			}
 		}
-
-		try {
-			Files.write(Paths.get("./output/#errors.txt"), errorFileContent.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (!errorFileContent.isBlank()) {
+			try {
+				Files.write(Paths.get("./output/#errors.txt"), errorFileContent.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
