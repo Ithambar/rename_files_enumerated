@@ -64,10 +64,5 @@ public class Application {
 				LoggerFactory.getLogger(getClass()).error(GENERIC_ERROR, e);
 			}
 		}
-		try (Scanner terminalInput = new Scanner(System.in)) {
-			if (terminalInput.hasNext()) {
-				terminalInput.nextLine();
-			}
-		}
 	}
 }
