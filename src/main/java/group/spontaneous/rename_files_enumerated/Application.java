@@ -50,11 +50,12 @@ public class Application {
 						.toString();
 			}
 		}
-
-		try {
-			Files.write(Paths.get("./output/#errors.txt"), errorFileContent.getBytes());
-		} catch (IOException e) {
-			LoggerFactory.getLogger(getClass()).error("An error occurred", e);
+		if (!errorFileContent.isBlank()) {
+			try {
+				Files.write(Paths.get("./output/#errors.txt"), errorFileContent.getBytes());
+			} catch (IOException e) {
+				LoggerFactory.getLogger(getClass()).error("An error occurred", e);
+			}
 		}
 	}
 }
