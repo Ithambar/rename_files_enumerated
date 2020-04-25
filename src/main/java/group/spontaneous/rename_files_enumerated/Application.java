@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,11 @@ public class Application {
 		File[] output = new File("./output").listFiles();
 
 		for (var file : output) {
-			file.delete();
+			try {
+				Files.delete(Paths.get(file.getPath()));
+			} catch (IOException e) {
+				LoggerFactory.getLogger(getClass()).error("An error occurred", e);
+			}
 		}
 
 		var errorFileContent = "";
@@ -41,14 +46,15 @@ public class Application {
 			try {
 				Files.copy(Paths.get(currentFile.getPath()), Paths.get(targetPath), StandardCopyOption.COPY_ATTRIBUTES);
 			} catch (IOException e) {
-				errorFileContent += currentFile.getName() + "\n";
+				errorFileContent = new StringBuilder(errorFileContent).append(currentFile.getName()).append("\n")
+						.toString();
 			}
 		}
 
 		try {
 			Files.write(Paths.get("./output/#errors.txt"), errorFileContent.getBytes());
 		} catch (IOException e) {
-			e.printStackTrace();
+			LoggerFactory.getLogger(getClass()).error("An error occurred", e);
 		}
 	}
 }
