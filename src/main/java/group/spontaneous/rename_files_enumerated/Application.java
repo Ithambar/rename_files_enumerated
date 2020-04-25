@@ -32,7 +32,7 @@ public class Application {
 
 	private String getPrefix() {
 		var result = "file";
-		System.out.println("Please enter Prefix...\nDefault: 'file'");
+		System.console().printf("Please enter Prefix...\nDefault: 'file'");
 
 		try (Scanner terminalInput = new Scanner(System.in)) {
 			var inputText = terminalInput.nextLine();
@@ -42,7 +42,7 @@ public class Application {
 					result = inputText;
 					break;
 				} else {
-					System.out.println(
+					System.console().printf(
 							"The Prefix was invalid! You FOOL!!!1!einself...\nOnly use \"A-Z a-z 0-9 . _ - [] () {} .\" and try again :)");
 					inputText = terminalInput.nextLine();
 				}
