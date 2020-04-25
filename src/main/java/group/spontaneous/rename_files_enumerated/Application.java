@@ -26,10 +26,22 @@ public class Application {
 
 		var prefix = "file";
 
+		System.out.println("Please enter Prefix...\nDefault: 'file'");
+
 		try (Scanner terminalInput = new Scanner(System.in)) {
 			var inputText = terminalInput.nextLine();
-			if (inputText.matches("^[\\w\\d-_\\ \\.\\(\\){}\\[\\]]+$")) {
-				prefix = inputText;
+
+			while (!inputText.isBlank()) {
+				if (inputText.matches("^[\\w\\d-_\\ \\.\\(\\){}\\[\\]]+$")) {
+					prefix = inputText;
+					break;
+				} else {
+
+					System.out.println(
+							"The Prefix was invalid! You FOOL!!!1!einself...\nOnly use \"A-Z a-z 0-9 . _ - [] () {} .\" and try again :)");
+					inputText = terminalInput.nextLine();
+
+				}
 			}
 		}
 
