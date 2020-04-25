@@ -24,12 +24,10 @@ public class Application {
 
 	@PostConstruct
 	public void init() {
-
 		var prefix = getPrefix();
 
 		cleanOutput();
 		renameFiles(prefix);
-
 	}
 
 	private String getPrefix() {
@@ -44,11 +42,9 @@ public class Application {
 					result = inputText;
 					break;
 				} else {
-
 					System.out.println(
 							"The Prefix was invalid! You FOOL!!!1!einself...\nOnly use \"A-Z a-z 0-9 . _ - [] () {} .\" and try again :)");
 					inputText = terminalInput.nextLine();
-
 				}
 			}
 		}
