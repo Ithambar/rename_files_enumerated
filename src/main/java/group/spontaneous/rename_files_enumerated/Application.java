@@ -37,7 +37,7 @@ public class Application {
 		System.console().printf("\n\n");
 		System.console().printf(HASHES);
 		System.console().printf(LESS_HASHES);
-		System.console().printf("  ##  Please term a Prefix or     ##\n");
+		System.console().printf("  ##  Please define a Prefix or   ##\n");
 		System.console().printf("  ##  press Enter for 'file'      ##\n");
 		System.console().printf(LESS_HASHES);
 		System.console().printf(HASHES);
