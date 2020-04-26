@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 public class Application {
 
 	private static final String GENERIC_ERROR = "An error occurred";
+	private static final String HASHES = "  ##################################\n";
+	private static final String LESS_HASHES = "  ##                              ##\n";
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -33,12 +35,12 @@ public class Application {
 	private String getPrefix() {
 		var result = "file";
 		System.console().printf("\n\n");
-		System.console().printf("  ##################################\n");
-		System.console().printf("  ##                              ##\n");
+		System.console().printf(HASHES);
+		System.console().printf(LESS_HASHES);
 		System.console().printf("  ##  Please term a Prefix or     ##\n");
 		System.console().printf("  ##  press Enter for 'file'      ##\n");
-		System.console().printf("  ##                              ##\n");
-		System.console().printf("  ##################################\n");
+		System.console().printf(LESS_HASHES);
+		System.console().printf(HASHES);
 		System.console().printf("\n");
 		System.console().printf("      Prefix: ");
 
@@ -51,17 +53,17 @@ public class Application {
 					break;
 				} else {
 					System.console().printf("\n\n");
-					System.console().printf("  ##################################\n");
-					System.console().printf("  ##                              ##\n");
+					System.console().printf(HASHES);
+					System.console().printf(LESS_HASHES);
 					System.console().printf("  ##  The Prefix was invalid!     ##\n");
 					System.console().printf("  ##  You FOOL!!!1!einself...     ##\n");
-					System.console().printf("  ##                              ##\n");
+					System.console().printf(LESS_HASHES);
 					System.console().printf("  ##  Only use:                   ##\n");
 					System.console().printf("  ##  A-Z a-z 0-9 . _ - () [] {}  ##\n");
-					System.console().printf("  ##                              ##\n");
+					System.console().printf(LESS_HASHES);
 					System.console().printf("  ##  Please try again :)         ##\n");
-					System.console().printf("  ##                              ##\n");
-					System.console().printf("  ##################################\n");
+					System.console().printf(LESS_HASHES);
+					System.console().printf(HASHES);
 					System.console().printf("\n");
 					System.console().printf("      Prefix: ");
 
