@@ -32,7 +32,15 @@ public class Application {
 
 	private String getPrefix() {
 		var result = "file";
-		System.console().printf("Please enter Prefix...\nDefault: 'file'");
+		System.console().printf("\n\n");
+		System.console().printf("  ##################################\n");
+		System.console().printf("  ##                              ##\n");
+		System.console().printf("  ##  Please term a Prefix or     ##\n");
+		System.console().printf("  ##  press Enter for 'file'      ##\n");
+		System.console().printf("  ##                              ##\n");
+		System.console().printf("  ##################################\n");
+		System.console().printf("\n");
+		System.console().printf("      Prefix: ");
 
 		try (Scanner terminalInput = new Scanner(System.in)) {
 			var inputText = terminalInput.nextLine();
@@ -42,8 +50,21 @@ public class Application {
 					result = inputText;
 					break;
 				} else {
-					System.console().printf(
-							"The Prefix was invalid! You FOOL!!!1!einself...\nOnly use \"A-Z a-z 0-9 . _ - [] () {} .\" and try again :)");
+					System.console().printf("\n\n");
+					System.console().printf("  ##################################\n");
+					System.console().printf("  ##                              ##\n");
+					System.console().printf("  ##  The Prefix was invalid!     ##\n");
+					System.console().printf("  ##  You FOOL!!!1!einself...     ##\n");
+					System.console().printf("  ##                              ##\n");
+					System.console().printf("  ##  Only use:                   ##\n");
+					System.console().printf("  ##  A-Z a-z 0-9 . _ - () [] {}  ##\n");
+					System.console().printf("  ##                              ##\n");
+					System.console().printf("  ##  Please try again :)         ##\n");
+					System.console().printf("  ##                              ##\n");
+					System.console().printf("  ##################################\n");
+					System.console().printf("\n");
+					System.console().printf("      Prefix: ");
+
 					inputText = terminalInput.nextLine();
 				}
 			}
