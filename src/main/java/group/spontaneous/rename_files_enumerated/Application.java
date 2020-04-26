@@ -48,7 +48,7 @@ public class Application {
 			var inputText = terminalInput.nextLine();
 
 			while (!inputText.isBlank()) {
-				if (inputText.matches("^[\\w\\d-_\\ \\.\\(\\){}\\[\\]]+$")) {
+				if (inputText.matches("^[\\w\\d-_\\.\\(\\){}\\[\\]]+$")) {
 					result = inputText;
 					break;
 				} else {
